@@ -1,0 +1,161 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "cf7058332f8dfe44d7c6",
+  "position": {
+    "x": 10,
+    "y": 360,
+    "z": 4,
+    "height": 350,
+    "width": 1260,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_transactions_gold"
+                    }
+                  },
+                  "Property": "txn_date"
+                }
+              },
+              "queryRef": "fact_transactions_gold.txn_date",
+              "nativeQueryRef": "txn_date",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_transactions_gold"
+                    }
+                  },
+                  "Property": "merchant_city"
+                }
+              },
+              "queryRef": "fact_transactions_gold.merchant_city",
+              "nativeQueryRef": "merchant_city",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_transactions_gold"
+                    }
+                  },
+                  "Property": "merchant_state"
+                }
+              },
+              "queryRef": "fact_transactions_gold.merchant_state",
+              "nativeQueryRef": "merchant_state",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_mcc"
+                    }
+                  },
+                  "Property": "mcc_description"
+                }
+              },
+              "queryRef": "dim_mcc.mcc_description",
+              "nativeQueryRef": "mcc_description",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_transactions_gold"
+                    }
+                  },
+                  "Property": "channel"
+                }
+              },
+              "queryRef": "fact_transactions_gold.channel",
+              "nativeQueryRef": "channel",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_transactions_gold"
+                    }
+                  },
+                  "Property": "amount"
+                }
+              },
+              "queryRef": "fact_transactions_gold.amount",
+              "nativeQueryRef": "amount",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_transactions_gold"
+                    }
+                  },
+                  "Property": "error_type"
+                }
+              },
+              "queryRef": "fact_transactions_gold.error_type",
+              "nativeQueryRef": "error_type",
+              "active": false
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_transactions_gold"
+                  }
+                },
+                "Property": "txn_date"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Últimas transacciones'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Lakehouse",
+    "displayName": "credit_gold"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d4835d62-8f33-b80a-4ea3-71741c4c22d9"
+  }
+}

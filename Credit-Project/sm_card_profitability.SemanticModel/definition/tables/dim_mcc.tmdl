@@ -1,0 +1,44 @@
+table dim_mcc
+	lineageTag: ad972ea8-8137-431a-9131-bf7f4972260a
+	sourceLineageTag: [dbo].[dim_mcc]
+
+	column mcc
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 9e87f804-66d2-4562-9caf-5d605178a842
+		sourceLineageTag: mcc
+		summarizeBy: none
+		sourceColumn: mcc
+
+		annotation SummarizationSetBy = Automatic
+
+	column mcc_description
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 440a58d9-c927-490a-9109-b552b3ef178e
+		sourceLineageTag: mcc_description
+		summarizeBy: none
+		sourceColumn: mcc_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column mcc_super_category
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 59394fdc-f337-4e7e-ac3b-9ba631613c40
+		sourceLineageTag: mcc_super_category
+		summarizeBy: none
+		sourceColumn: mcc_super_category
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_mcc = entity
+		mode: directLake
+		source
+			entityName: dim_mcc
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

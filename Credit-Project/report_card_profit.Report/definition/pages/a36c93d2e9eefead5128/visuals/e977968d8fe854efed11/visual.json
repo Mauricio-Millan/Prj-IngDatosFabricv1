@@ -1,0 +1,184 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "e977968d8fe854efed11",
+  "position": {
+    "x": 10,
+    "y": 380,
+    "z": 5,
+    "height": 170,
+    "width": 1260,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_card"
+                    }
+                  },
+                  "Property": "card_id"
+                }
+              },
+              "queryRef": "dim_card.card_id",
+              "nativeQueryRef": "card_id",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_user_profile"
+                    }
+                  },
+                  "Property": "credit_score_band"
+                }
+              },
+              "queryRef": "dim_user_profile.credit_score_band",
+              "nativeQueryRef": "credit_score_band"
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_card_utilization"
+                    }
+                  },
+                  "Property": "Total Credit Limit"
+                }
+              },
+              "queryRef": "fact_card_utilization.Total Credit Limit",
+              "nativeQueryRef": "Total Credit Limit"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_card_utilization"
+                    }
+                  },
+                  "Property": "Avg Utilization %"
+                }
+              },
+              "queryRef": "fact_card_utilization.Avg Utilization %",
+              "nativeQueryRef": "Avg Utilization %",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_card_utilization"
+                    }
+                  },
+                  "Property": "Interchange Revenue Proxy"
+                }
+              },
+              "queryRef": "fact_card_utilization.Interchange Revenue Proxy",
+              "nativeQueryRef": "Interchange Revenue Proxy"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "fillPoint": [
+        {
+          "properties": {}
+        }
+      ],
+      "bubbles": [
+        {
+          "properties": {
+            "bubbleSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "xAxisReferenceLine": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "displayName": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Corte de utilización 50%'"
+                }
+              }
+            },
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "0.5D"
+                }
+              }
+            },
+            "style": {
+              "expr": {
+                "Literal": {
+                  "Value": "'dashed'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "1"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cartera por Utilización x Rentabilidad'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

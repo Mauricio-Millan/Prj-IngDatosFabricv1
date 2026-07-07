@@ -1,0 +1,87 @@
+table dim_date_month
+	lineageTag: 112afb28-ef94-4114-9a22-572a3af5ffaf
+	sourceLineageTag: [dbo].[dim_date_month]
+
+	column month_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 51e5ce93-9ac7-4c68-9797-94a2cad772b6
+		sourceLineageTag: month_key
+		summarizeBy: none
+		sourceColumn: month_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_month
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 22a307e5-d195-49c7-a051-fb14b8aca4ac
+		sourceLineageTag: year_month
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ef47cfa5-ea22-44db-af97-5ea0ff8d0a54
+		sourceLineageTag: year
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1b87074d-9f41-4a47-b723-225bed1e29e0
+		sourceLineageTag: quarter
+		summarizeBy: none
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 807f2bd2-e650-4996-8c15-0e24266d7b02
+		sourceLineageTag: month
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fe23e055-3456-446d-b586-425135539fc3
+		sourceLineageTag: month_name
+		summarizeBy: none
+		sourceColumn: month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_label
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 035934cd-9508-47de-a6d8-188a2004c8e7
+		sourceLineageTag: month_label
+		summarizeBy: none
+		sourceColumn: month_label
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date_month = entity
+		mode: directLake
+		source
+			entityName: dim_date_month
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

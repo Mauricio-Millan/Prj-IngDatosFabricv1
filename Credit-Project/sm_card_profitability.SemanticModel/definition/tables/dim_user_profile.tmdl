@@ -1,0 +1,153 @@
+table dim_user_profile
+	lineageTag: 78fe2e33-25c0-4fd6-82f5-a83253ff08f3
+	sourceLineageTag: [dbo].[dim_user_profile]
+
+	column user_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b4287c0b-f42a-42df-99ab-ebd6e9528342
+		sourceLineageTag: user_id
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column current_age
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6f1d7685-e0f2-404b-aef6-56d6d0f418c2
+		sourceLineageTag: current_age
+		summarizeBy: none
+		sourceColumn: current_age
+
+		annotation SummarizationSetBy = Automatic
+
+	column age_band
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 45d6591b-b34b-425d-b714-9f65594aa87c
+		sourceLineageTag: age_band
+		summarizeBy: none
+		sourceColumn: age_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9330fac8-42f7-41d7-997c-a0481b90e8a9
+		sourceLineageTag: gender
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column per_capita_income
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 6f8cbe66-dbc5-44f9-a657-01251ca1c550
+		sourceLineageTag: per_capita_income
+		summarizeBy: none
+		sourceColumn: per_capita_income
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column yearly_income
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 711b28b0-fa44-430a-99ca-dc6659537fec
+		sourceLineageTag: yearly_income
+		summarizeBy: none
+		sourceColumn: yearly_income
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column income_band
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: dfeb8444-da85-4afe-8ecd-21fa15175c00
+		sourceLineageTag: income_band
+		summarizeBy: none
+		sourceColumn: income_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_debt
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 83a81aee-daac-402f-b01a-f9760ad0bb09
+		sourceLineageTag: total_debt
+		summarizeBy: none
+		sourceColumn: total_debt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column debt_to_income_ratio
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 984e4f4a-ed55-4589-90b4-0c93aa82295e
+		sourceLineageTag: debt_to_income_ratio
+		summarizeBy: none
+		sourceColumn: debt_to_income_ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column credit_score
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8176b619-c25e-4c73-bb20-d1178f682f3d
+		sourceLineageTag: credit_score
+		summarizeBy: none
+		sourceColumn: credit_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column credit_score_band
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: eda191d9-5b1f-4b7c-bc8b-a62f3be7deda
+		sourceLineageTag: credit_score_band
+		summarizeBy: none
+		sourceColumn: credit_score_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_credit_cards
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 81706d40-9015-471c-a5f2-a6b8bfd26674
+		sourceLineageTag: num_credit_cards
+		summarizeBy: none
+		sourceColumn: num_credit_cards
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_risk_index
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 54a4ce50-aff7-4281-8fef-cc3e7e2c43ab
+		sourceLineageTag: customer_risk_index
+		summarizeBy: none
+		sourceColumn: customer_risk_index
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_user_profile = entity
+		mode: directLake
+		source
+			entityName: dim_user_profile
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

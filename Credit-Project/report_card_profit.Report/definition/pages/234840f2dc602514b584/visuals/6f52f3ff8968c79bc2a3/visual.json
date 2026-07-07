@@ -1,0 +1,137 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "6f52f3ff8968c79bc2a3",
+  "position": {
+    "x": 10,
+    "y": 48,
+    "z": 1,
+    "height": 300,
+    "width": 380,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "multiRowCard",
+    "query": {
+      "queryState": {
+        "Fields": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_card"
+                    }
+                  },
+                  "Property": "card_id"
+                }
+              },
+              "queryRef": "dim_card.card_id",
+              "nativeQueryRef": "card_id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_card"
+                    }
+                  },
+                  "Property": "card_type"
+                }
+              },
+              "queryRef": "dim_card.card_type",
+              "nativeQueryRef": "card_type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_card"
+                    }
+                  },
+                  "Property": "card_brand"
+                }
+              },
+              "queryRef": "dim_card.card_brand",
+              "nativeQueryRef": "card_brand"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_card"
+                    }
+                  },
+                  "Property": "credit_limit"
+                }
+              },
+              "queryRef": "dim_card.credit_limit",
+              "nativeQueryRef": "credit_limit"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_card"
+                    }
+                  },
+                  "Property": "credit_limit_band"
+                }
+              },
+              "queryRef": "dim_card.credit_limit_band",
+              "nativeQueryRef": "credit_limit_band"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_card"
+                    }
+                  },
+                  "Property": "product_tier"
+                }
+              },
+              "queryRef": "dim_card.product_tier",
+              "nativeQueryRef": "product_tier"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_card"
+                    }
+                  },
+                  "Property": "card_on_dark_web"
+                }
+              },
+              "queryRef": "dim_card.card_on_dark_web",
+              "nativeQueryRef": "card_on_dark_web"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Detalle de la tarjeta'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

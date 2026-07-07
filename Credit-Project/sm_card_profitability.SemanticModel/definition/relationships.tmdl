@@ -1,0 +1,32 @@
+relationship fcd577c5-5582-034c-659f-6b0b4fe4cf85
+	fromColumn: fact_card_utilization.card_id
+	toColumn: dim_card.card_id
+
+relationship a7061f09-eaad-bb68-1437-2b86fc0b849b
+	fromColumn: fact_card_utilization.user_id
+	toColumn: dim_user_profile.user_id
+
+relationship f20c9e61-d2ca-756f-a5bb-bee23f3df8af
+	fromColumn: fact_card_utilization.utilization_band
+	toColumn: dim_utilization_band.band_label
+
+relationship 7d2eade4-c35e-7e38-6f7d-9702110d25f3
+	fromColumn: fact_transactions_gold.mcc
+	toColumn: dim_mcc.mcc
+
+relationship d4265daf-eedd-1d70-4650-adbf52339ade
+	fromColumn: fact_card_utilization.month_key
+	toColumn: dim_date_month.month_key
+
+relationship d106e2dc-cac4-4346-8261-15fb675a9ff7
+	fromColumn: fact_transactions_gold.card_id
+	toColumn: dim_card.card_id
+
+relationship 1902e058-8a7c-42bd-8c21-30b39b9c9ab3
+	fromColumn: fact_transactions_gold.user_id
+	toColumn: dim_user_profile.user_id
+
+relationship 6c285ff7-806e-491a-9964-faceb77020b0
+	fromColumn: fact_transactions_gold.month_key
+	toColumn: dim_date_month.month_key
+

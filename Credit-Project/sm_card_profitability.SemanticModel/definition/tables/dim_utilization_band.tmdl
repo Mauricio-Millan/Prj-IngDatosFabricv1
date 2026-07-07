@@ -1,0 +1,78 @@
+table dim_utilization_band
+	lineageTag: 71a1dfb9-9778-4335-93b5-1994326c1213
+	sourceLineageTag: [dbo].[dim_utilization_band]
+
+	column band_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 604114a1-c0e1-487d-b231-6e46fe726a1f
+		sourceLineageTag: band_key
+		summarizeBy: none
+		sourceColumn: band_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column band_label
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b12f6dc5-c345-4157-ada5-d511315d378d
+		sourceLineageTag: band_label
+		summarizeBy: none
+		sourceColumn: band_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column min_util
+		dataType: double
+		sourceProviderType: float
+		lineageTag: e66449f3-774b-4eab-be42-7040effba822
+		sourceLineageTag: min_util
+		summarizeBy: none
+		sourceColumn: min_util
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column max_util
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 01bc71bc-12a6-4b5e-b39b-2c15caf08948
+		sourceLineageTag: max_util
+		summarizeBy: none
+		sourceColumn: max_util
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column risk_level
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 725be305-f31f-491e-963e-4c800b578111
+		sourceLineageTag: risk_level
+		summarizeBy: none
+		sourceColumn: risk_level
+
+		annotation SummarizationSetBy = Automatic
+
+	column recommended_action
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 41191677-1d36-45fb-9b0b-17df1f8e7f6a
+		sourceLineageTag: recommended_action
+		summarizeBy: none
+		sourceColumn: recommended_action
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_utilization_band = entity
+		mode: directLake
+		source
+			entityName: dim_utilization_band
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

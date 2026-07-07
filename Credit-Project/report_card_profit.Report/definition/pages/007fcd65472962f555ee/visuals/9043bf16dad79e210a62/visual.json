@@ -1,0 +1,71 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "9043bf16dad79e210a62",
+  "position": {
+    "x": 1030,
+    "y": 380,
+    "z": 7,
+    "height": 75,
+    "width": 240,
+    "tabOrder": 7
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_card_utilization"
+                    }
+                  },
+                  "Property": "Cards Upgrade Candidates"
+                }
+              },
+              "queryRef": "fact_card_utilization.Cards Upgrade Candidates",
+              "nativeQueryRef": "Cards Upgrade Candidates"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_card_utilization"
+                  }
+                },
+                "Property": "Cards Upgrade Candidates"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Candidatos a aumentar límite'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

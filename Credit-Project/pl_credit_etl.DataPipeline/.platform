@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "pl_credit_etl"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b83c00fe-0a80-bdc4-4ad9-3d20b7abcc6f"
+  }
+}

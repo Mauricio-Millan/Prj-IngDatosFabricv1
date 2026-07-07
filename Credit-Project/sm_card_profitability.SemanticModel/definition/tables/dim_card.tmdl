@@ -1,0 +1,139 @@
+table dim_card
+	lineageTag: 03dbe7de-9120-42b3-ae90-f8da812bfdef
+	sourceLineageTag: [dbo].[dim_card]
+
+	column card_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 24a43fed-8482-4ec0-b930-2d701703f821
+		sourceLineageTag: card_id
+		summarizeBy: none
+		sourceColumn: card_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2528f43c-bb96-4b6f-a912-e5e6db975f05
+		sourceLineageTag: user_id
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column card_brand
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cd8fb0aa-7c70-4eb3-a3bd-cf5c3690e2a8
+		sourceLineageTag: card_brand
+		summarizeBy: none
+		sourceColumn: card_brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column card_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f04cd6b5-be24-4b9c-a5af-0f41342795a5
+		sourceLineageTag: card_type
+		summarizeBy: none
+		sourceColumn: card_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column credit_limit
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 609fe5ea-0f71-4264-8b89-9fa4f1e80fe5
+		sourceLineageTag: credit_limit
+		summarizeBy: none
+		sourceColumn: credit_limit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column credit_limit_band
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c1be35ca-1c9b-4726-9460-b8ee86b2cd06
+		sourceLineageTag: credit_limit_band
+		summarizeBy: none
+		sourceColumn: credit_limit_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_tier
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 68f23b27-ee63-44b2-b738-bfbe9cb76a8d
+		sourceLineageTag: product_tier
+		summarizeBy: none
+		sourceColumn: product_tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_chip
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: a02f36d7-9e0c-427e-b0de-2879e311f295
+		sourceLineageTag: has_chip
+		summarizeBy: none
+		sourceColumn: has_chip
+
+		annotation SummarizationSetBy = Automatic
+
+	column card_on_dark_web
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: be0fabfe-340d-4a41-9ca4-44c93820aaf1
+		sourceLineageTag: card_on_dark_web
+		summarizeBy: none
+		sourceColumn: card_on_dark_web
+
+		annotation SummarizationSetBy = Automatic
+
+	column card_age_months
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: fe829e75-aeab-45af-9112-832b8cecfe90
+		sourceLineageTag: card_age_months
+		summarizeBy: none
+		sourceColumn: card_age_months
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_cards_issued
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 62696c12-effa-46c6-9837-54b62a4f6526
+		sourceLineageTag: num_cards_issued
+		summarizeBy: none
+		sourceColumn: num_cards_issued
+
+		annotation SummarizationSetBy = Automatic
+
+	column acct_open_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 0ec45de7-424a-40ce-9389-fc498ae3d20d
+		sourceLineageTag: acct_open_date
+		summarizeBy: none
+		sourceColumn: acct_open_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_card = entity
+		mode: directLake
+		source
+			entityName: dim_card
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

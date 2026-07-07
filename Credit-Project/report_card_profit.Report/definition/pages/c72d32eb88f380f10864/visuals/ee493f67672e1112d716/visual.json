@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "ee493f67672e1112d716",
+  "position": {
+    "x": 10,
+    "y": 488.57142857142861,
+    "z": 5,
+    "height": 194.28571428571431,
+    "width": 192.85714285714286,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_card_utilization"
+                    }
+                  },
+                  "Property": "Total Monthly Spend"
+                }
+              },
+              "queryRef": "fact_card_utilization.Total Monthly Spend",
+              "nativeQueryRef": "Total Monthly Spend"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_card_utilization"
+                  }
+                },
+                "Property": "Total Monthly Spend"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

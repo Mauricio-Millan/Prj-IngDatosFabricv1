@@ -1,0 +1,105 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "e0189c5a83770731f34a",
+  "position": {
+    "x": 10,
+    "y": 555,
+    "z": 6,
+    "height": 160,
+    "width": 610,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "treemap",
+    "query": {
+      "queryState": {
+        "Group": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_mcc"
+                    }
+                  },
+                  "Property": "mcc_super_category"
+                }
+              },
+              "queryRef": "dim_mcc.mcc_super_category",
+              "nativeQueryRef": "mcc_super_category",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_transactions_gold"
+                    }
+                  },
+                  "Property": "Interchange Revenue Proxy (Txn)"
+                }
+              },
+              "queryRef": "fact_transactions_gold.Interchange Revenue Proxy (Txn)",
+              "nativeQueryRef": "Interchange Revenue Proxy (Txn)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_transactions_gold"
+                  }
+                },
+                "Property": "Interchange Revenue Proxy (Txn)"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Revenue por categoría de comercio'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

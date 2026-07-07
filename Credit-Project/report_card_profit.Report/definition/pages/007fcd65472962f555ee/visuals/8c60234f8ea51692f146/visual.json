@@ -1,0 +1,345 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "8c60234f8ea51692f146",
+  "position": {
+    "x": 640,
+    "y": 555,
+    "z": 10,
+    "height": 160,
+    "width": 630,
+    "tabOrder": 10
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_utilization_band"
+                    }
+                  },
+                  "Property": "band_label"
+                }
+              },
+              "queryRef": "dim_utilization_band.band_label",
+              "nativeQueryRef": "band_label",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_utilization_band"
+                    }
+                  },
+                  "Property": "risk_level"
+                }
+              },
+              "queryRef": "dim_utilization_band.risk_level",
+              "nativeQueryRef": "risk_level",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_utilization_band"
+                    }
+                  },
+                  "Property": "recommended_action"
+                }
+              },
+              "queryRef": "dim_utilization_band.recommended_action",
+              "nativeQueryRef": "recommended_action",
+              "active": false
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_card_utilization"
+                    }
+                  },
+                  "Property": "Cards Count"
+                }
+              },
+              "queryRef": "fact_card_utilization.Cards Count",
+              "nativeQueryRef": "Cards Count",
+              "active": false
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_card_utilization"
+                    }
+                  },
+                  "Property": "Interchange Revenue Proxy"
+                }
+              },
+              "queryRef": "fact_card_utilization.Interchange Revenue Proxy",
+              "nativeQueryRef": "Interchange Revenue Proxy",
+              "active": false
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_utilization_band"
+                  }
+                },
+                "Property": "band_label"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#7A8085'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "dim_utilization_band"
+                          }
+                        },
+                        "Property": "band_label"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Dormant (<10%)'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "dim_utilization_band.band_label"
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#85B7EB'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "dim_utilization_band"
+                          }
+                        },
+                        "Property": "band_label"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Low (10-30%)'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "dim_utilization_band.band_label"
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1D9E75'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "dim_utilization_band"
+                          }
+                        },
+                        "Property": "band_label"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Optimal (30-70%)'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "dim_utilization_band.band_label"
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#EFC97A'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "dim_utilization_band"
+                          }
+                        },
+                        "Property": "band_label"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'High (70-90%)'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "dim_utilization_band.band_label"
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#D4537E'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "dim_utilization_band"
+                          }
+                        },
+                        "Property": "band_label"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Critical (>90%)'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "dim_utilization_band.band_label"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Acción recomendada por banda'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,489 @@
+table fact_card_utilization
+	lineageTag: c46e1cf0-4f27-4439-9f01-8ae39f8e6198
+	sourceLineageTag: [dbo].[fact_card_utilization]
+
+	measure 'Total Monthly Spend' = SUM(fact_card_utilization[monthly_spend])
+		lineageTag: 6019b81b-8d52-4cad-bf4d-a9957a903a77
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Credit Limit' = ```
+			
+			    SUMX(VALUES(dim_card[card_id]), CALCULATE(MAX(dim_card[credit_limit])))
+			```
+		lineageTag: 2f829aef-f066-4574-898e-e6c3b0fab724
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Interchange Revenue Proxy' = ```
+			
+			    SUM(fact_card_utilization[interchange_revenue_proxy])
+			```
+		lineageTag: be6e190d-605f-4f06-af6a-e58408aa3ad3
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cards Optimal Zone' = ```
+			
+			    CALCULATE(DISTINCTCOUNT(fact_card_utilization[card_id]),
+			        fact_card_utilization[utilization_band] = "Optimal (30-70%)")
+			
+			```
+		formatString: 0
+		lineageTag: c87cb5ed-3f66-4d00-8bd9-ca19c430e706
+
+		changedProperty = Name
+
+	measure 'Cards Upgrade Candidates' = ```
+			
+			    CALCULATE(DISTINCTCOUNT(fact_card_utilization[card_id]),
+			        fact_card_utilization[upgrade_candidate] = TRUE())
+			```
+		formatString: 0
+		lineageTag: 6ee6dc2d-fed0-48ac-8dea-54159d93e024
+
+		changedProperty = Name
+
+	measure 'Avg Utilization %' =
+			
+			CALCULATE(
+			    AVERAGE(fact_card_utilization[utilization_ratio]),
+			    fact_card_utilization[credit_limit] > 500,
+			    fact_card_utilization[utilization_ratio] <= 3
+			)
+		formatString: Percent
+		lineageTag: d3621ca0-4ea6-4805-b73b-1d27b02b8614
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Portfolio Optimal %' = ```
+			
+			    DIVIDE([Cards Optimal Zone],
+			        DISTINCTCOUNT(fact_card_utilization[card_id]))
+			```
+		formatString: Percent
+		lineageTag: 8d48f6ab-39cf-4e38-a4f7-11baeb79ff62
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Return on Limit' = ```
+			
+			    DIVIDE([Interchange Revenue Proxy], [Total Credit Limit])
+			```
+		formatString: Percent
+		lineageTag: 07808fed-3887-4eb5-b742-009eeaed1572
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'MoM Utilization Change pp' =
+			
+			VAR CurrentMonth = SELECTEDVALUE(dim_date_month[month_key])
+			VAR PriorMonthKey =
+			    IF(
+			        MOD(CurrentMonth, 100) = 1,
+			        CurrentMonth - 100 + 11,
+			        CurrentMonth - 1
+			    )
+			VAR PriorUtil =
+			    CALCULATE(
+			        [Avg Utilization %],
+			        ALL(dim_date_month),
+			        dim_date_month[month_key] = PriorMonthKey
+			    )
+			RETURN
+			    [Avg Utilization %] - PriorUtil
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: fb12bd69-8857-4ad3-b226-653c4d122d69
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Cards Extreme Utilization' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_card_utilization[card_id]),
+			    fact_card_utilization[utilization_ratio] > 3
+			)
+		formatString: 0
+		lineageTag: 4abc1a39-fe76-496c-a899-d47a79317b1c
+
+		changedProperty = Name
+
+	measure 'Extreme Cases Exposure $' =
+			
+			CALCULATE(
+			    SUM(fact_card_utilization[monthly_spend]),
+			    fact_card_utilization[utilization_ratio] > 3
+			)
+		lineageTag: b77f3862-d172-4476-950b-0ca763c2fa31
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Median Utilization %' =
+			
+			MEDIANX(
+			    FILTER(
+			        fact_card_utilization,
+			        fact_card_utilization[credit_limit] > 500
+			    ),
+			    fact_card_utilization[utilization_ratio]
+			)
+		lineageTag: 7831f4d0-145b-46d6-bc84-dc46a8873763
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cards Count' = DISTINCTCOUNT(fact_card_utilization[card_id])
+		formatString: 0
+		lineageTag: 75626d10-24b0-43ab-887f-a29d5f7ebbcc
+
+	measure 'Target Optimal %' = 0.65
+		formatString: Percent
+		lineageTag: bcb811a6-2118-4579-a705-7efdf9baeab8
+
+	measure 'Gauge Max' = 1
+		formatString: 0
+		lineageTag: 36e3ac15-fd1c-4674-93ab-7c0df581d278
+
+	measure 'Dormant Activation Potential $' = ```
+			
+			    SUMX(
+			        FILTER(
+			            fact_card_utilization,
+			            fact_card_utilization[utilization_ratio] < 0.10
+			        ),
+			        fact_card_utilization[credit_limit] * 0.30 * 0.0235
+			    )
+			```
+		lineageTag: 370bec37-ce5b-4f5a-af76-c2a24034b0d5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue per Active Card' = ```
+			
+			    DIVIDE(
+			        [Interchange Revenue Proxy],
+			        CALCULATE(
+			            DISTINCTCOUNT(fact_card_utilization[card_id]),
+			            fact_card_utilization[monthly_spend] > 0
+			        )
+			    )
+			```
+		lineageTag: 44ecc879-0d5f-4cc3-9867-5566ab76687c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column card_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d548ff06-e0f4-46b0-93c4-fcea85de28eb
+		sourceLineageTag: card_id
+		summarizeBy: none
+		sourceColumn: card_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 54b9261d-27f5-4c44-a5c8-8b93f9fc7f5c
+		sourceLineageTag: user_id
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 321937bc-90c1-4f21-ad26-c033a50129bc
+		sourceLineageTag: month_key
+		summarizeBy: none
+		sourceColumn: month_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_month
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3d5c0eb9-235e-4df7-a2d4-6b9db1db84d5
+		sourceLineageTag: year_month
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: dea14fbc-d53a-4f5d-b4a5-c78da9f45b8c
+		sourceLineageTag: year
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 20f771ea-d71a-4e1f-b580-843941a2981e
+		sourceLineageTag: month
+		summarizeBy: sum
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column monthly_spend
+		dataType: double
+		sourceProviderType: float
+		lineageTag: a8524d7f-d162-4896-ba58-3d54d165f133
+		sourceLineageTag: monthly_spend
+		summarizeBy: sum
+		sourceColumn: monthly_spend
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column txn_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 67d7606c-c6a5-4cf6-9255-16334785f5b4
+		sourceLineageTag: txn_count
+		summarizeBy: sum
+		sourceColumn: txn_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_ticket
+		dataType: double
+		sourceProviderType: float
+		lineageTag: e103bccb-64cb-46ef-89b8-fa395b75868f
+		sourceLineageTag: avg_ticket
+		summarizeBy: sum
+		sourceColumn: avg_ticket
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column max_ticket
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 6ebac371-591e-47f2-982d-fb7b8dad7018
+		sourceLineageTag: max_ticket
+		summarizeBy: sum
+		sourceColumn: max_ticket
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column online_spend
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 83f61eb2-930c-4225-906c-714f13acff7a
+		sourceLineageTag: online_spend
+		summarizeBy: sum
+		sourceColumn: online_spend
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column chip_spend
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 63c13d69-a1f5-4484-88a5-c8f5eb557798
+		sourceLineageTag: chip_spend
+		summarizeBy: sum
+		sourceColumn: chip_spend
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column swipe_spend
+		dataType: double
+		sourceProviderType: float
+		lineageTag: d9ad58f9-5104-404b-b4e9-5665889bf5a5
+		sourceLineageTag: swipe_spend
+		summarizeBy: sum
+		sourceColumn: swipe_spend
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column error_txn_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 7484b19b-b541-4a92-99d1-b0c650ef6a73
+		sourceLineageTag: error_txn_count
+		summarizeBy: sum
+		sourceColumn: error_txn_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column credit_limit
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 2b920f01-d637-4280-aa40-b231a232d75f
+		sourceLineageTag: credit_limit
+		summarizeBy: sum
+		sourceColumn: credit_limit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column utilization_ratio
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 6257c398-9b43-4071-8288-db2c05d78980
+		sourceLineageTag: utilization_ratio
+		summarizeBy: sum
+		sourceColumn: utilization_ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column utilization_pct
+		dataType: double
+		sourceProviderType: float
+		lineageTag: a923c4b3-f5b4-463f-8508-fb7ccb821ff7
+		sourceLineageTag: utilization_pct
+		summarizeBy: sum
+		sourceColumn: utilization_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column utilization_band
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c5959130-259c-4548-8753-272a043327a8
+		sourceLineageTag: utilization_band
+		summarizeBy: none
+		sourceColumn: utilization_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column interchange_revenue_proxy
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 3460aac0-5c51-4428-92a5-0054e54eb674
+		sourceLineageTag: interchange_revenue_proxy
+		summarizeBy: sum
+		sourceColumn: interchange_revenue_proxy
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column net_revenue_proxy
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 6cbfcd6e-bf06-4d2b-84dd-41f8f64c7f1c
+		sourceLineageTag: net_revenue_proxy
+		summarizeBy: sum
+		sourceColumn: net_revenue_proxy
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column limit_efficiency
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 1f5cb621-35f6-4ad6-8e91-c9c40813376b
+		sourceLineageTag: limit_efficiency
+		summarizeBy: sum
+		sourceColumn: limit_efficiency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column upgrade_candidate
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 33cf477b-1d32-4fb5-90a5-335478130cba
+		sourceLineageTag: upgrade_candidate
+		summarizeBy: none
+		sourceColumn: upgrade_candidate
+
+		annotation SummarizationSetBy = Automatic
+
+	column overutilization_flag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 02d7fb31-8e1e-44e6-9d16-5a90a9325a73
+		sourceLineageTag: overutilization_flag
+		summarizeBy: none
+		sourceColumn: overutilization_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_tier
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3ccbb639-74f5-4a4e-9209-8548b0815a53
+		sourceLineageTag: product_tier
+		summarizeBy: none
+		sourceColumn: product_tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column credit_limit_band
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 20254b45-bae1-46c9-a50e-e1cb519ae98b
+		sourceLineageTag: credit_limit_band
+		summarizeBy: none
+		sourceColumn: credit_limit_band
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_card_utilization = entity
+		mode: directLake
+		source
+			entityName: fact_card_utilization
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

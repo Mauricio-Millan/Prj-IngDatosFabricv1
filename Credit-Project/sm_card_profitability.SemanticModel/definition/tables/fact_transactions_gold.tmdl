@@ -1,0 +1,158 @@
+table fact_transactions_gold
+	lineageTag: 332a6954-de43-4694-b81a-75fdf53a17ee
+	sourceLineageTag: [dbo].[fact_transactions_gold]
+
+	measure 'Interchange Revenue Proxy (Txn)' = ```
+			
+			    SUMX(fact_transactions_gold, fact_transactions_gold[amount] * 0.0235)
+			```
+		lineageTag: 173718ba-5b10-4844-b20a-1319fddb3cab
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column transaction_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 71d0421c-0aaf-4097-89c6-62510bee801c
+		sourceLineageTag: transaction_id
+		summarizeBy: none
+		sourceColumn: transaction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column txn_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: a3996083-1e5e-4515-92d2-6631dbd42ead
+		sourceLineageTag: txn_date
+		summarizeBy: none
+		sourceColumn: txn_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1039c94e-0229-45ac-8217-ead5b6e92d6d
+		sourceLineageTag: month_key
+		summarizeBy: sum
+		sourceColumn: month_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column card_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1ddf5801-cfe4-4e66-aa35-ea863e8be4ee
+		sourceLineageTag: card_id
+		summarizeBy: none
+		sourceColumn: card_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b4880099-644d-43b2-9056-18ac87181b55
+		sourceLineageTag: user_id
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column mcc
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b29dec13-4557-4311-8238-ae56c6cce65a
+		sourceLineageTag: mcc
+		summarizeBy: none
+		sourceColumn: mcc
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cfe121e4-a701-4f45-a150-7336df62591e
+		sourceLineageTag: channel
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 2b3d62fa-dc79-4c01-9f96-7286ccc82848
+		sourceLineageTag: amount
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column merchant_city
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b78f869b-56c1-4430-9b3b-30163f04de43
+		sourceLineageTag: merchant_city
+		summarizeBy: none
+		sourceColumn: merchant_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column merchant_state
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 28a13b23-1e80-45ec-99fc-864dff608b9a
+		sourceLineageTag: merchant_state
+		summarizeBy: none
+		sourceColumn: merchant_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column error_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5a82ee65-980c-47c6-9042-c777145977b8
+		sourceLineageTag: error_type
+		summarizeBy: none
+		sourceColumn: error_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 73a9df64-df06-4a5c-bad2-2fe4b796d763
+		sourceLineageTag: year
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4b81793c-6bef-40c1-b54a-0e3a1d618a72
+		sourceLineageTag: month
+		summarizeBy: sum
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_transactions_gold = entity
+		mode: directLake
+		source
+			entityName: fact_transactions_gold
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+
